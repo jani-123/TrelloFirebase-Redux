@@ -1,0 +1,54 @@
+/*  SignIn vistas */
+.logo2{
+  width: 250px;
+  height: 100px;
+  margin-top: 120px;
+  margin-left: 42%;
+  background-color: transparent;
+}
+
+.texto{
+  width: 400px;
+  height: 55px;
+}
+.btn-sign-in{
+  width: 200px;
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  margin-left: -50px;
+}
+.formulario{
+  margin-left: 35%;
+  margin-top: 20px;
+}
+.new{
+  color: white;
+}
+.new-vist{
+  text-align: center;
+}
+.footer{
+  color: white;
+  text-align: center;
+  margin-top: 120px;
+}
+
+/*  vista trello */
+
+.cajaText{
+  margin: 20px;
+  background-color: #2869cc;
+  width: 250px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  display: inline-block
+}
+.cajaText:hover{
+  background-color: #28317c;
+}
+.text{
+  color: white; 
+}
+
