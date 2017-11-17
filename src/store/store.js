@@ -1,13 +1,13 @@
 import createStore from "redux-zero";
 
-//const LISTCOMMENT = [];
-
 const initialState = {
-  title: "hola mundo"
-	//listBoard: LISTCOMMENT,
-  // selectedListBoard: 0,
-  // active: false,
-  // addActive:false
+  successLogin : false,
+   user : {
+      id : null,
+      firstname : null,
+      lastname: null,
+      email :  null          
+   }  
 };
 
 const store = createStore(initialState);

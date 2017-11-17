@@ -1,20 +1,33 @@
 import React from "react";
-import trello from '../../trello-logo.png';
-//import {addStage} from '../../actions/actions'
-import './SignUp.css'
-import { NavLink } from "react-router-dom";
+import trello from "../../trello-logo.png";
+import { addSignUp } from "../../actions/actions";
+import "./SignUp.css";
+import { NavLink, Redirect } from "react-router-dom";
 
-const SignUp = ({ title }) => {
+const SignUp = ({ successLogin }) => {
   return (
     <div className="sign">
-    <img src={trello} className="logo2" />
-      <form className="form-horizontal formulario">
+      <img src={trello} className="logo2" />
+      {successLogin && <Redirect to="/Board" />}
+      <form
+        className="form-horizontal formulario"
+        onSubmit={e => {
+          e.preventDefault();
+          addSignUp(
+            this.firstName.value,
+            this.lastName.value,
+            this.email.value,
+            this.password.value
+          );
+        }}
+      >
         <div className="form-group">
           <div className="col-sm-10">
             <input
               type="text"
               className="form-control texto"
               placeholder="First name"
+              ref={e => (this.firstName = e)}
             />
           </div>
         </div>
@@ -24,6 +37,7 @@ const SignUp = ({ title }) => {
               type="text"
               className="form-control texto"
               placeholder="Last name"
+              ref={e => (this.lastName = e)}
             />
           </div>
         </div>
@@ -33,6 +47,7 @@ const SignUp = ({ title }) => {
               type="email"
               className="form-control texto"
               placeholder="Email"
+              ref={e => (this.email = e)}
             />
           </div>
         </div>
@@ -42,28 +57,20 @@ const SignUp = ({ title }) => {
               type="password"
               className="form-control texto"
               placeholder="Password"
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-10">
-            <input
-              type="password"
-              className="form-control texto"
-              placeholder="Confirm password"
+              ref={e => (this.password = e)}
             />
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <NavLink to="/Board" type="submit" className="btn btn-lg btn-sign-in">
+            <button type="submit" className="btn btn-lg btn-sign-in">
               Sign Up
-            </NavLink>
+            </button>
           </div>
         </div>
       </form>
       <div className="new-vist">
-        <NavLink to="/" type="submit" className="btn new">
+        <NavLink to="/SignIn" type="submit" className="btn new">
           Sign In
         </NavLink>
       </div>

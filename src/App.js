@@ -11,22 +11,20 @@ import { HashRouter, Switch, Route } from "react-router-dom";
   addTitleList,
   changeVista,
   changeTextList,
-  addNote
+  addNote 
 } from "./actions";
 import { NavLink } from "react-router-dom";*/
 
-const TrelloApp = ({ title }) => {
-  console.log(title);
-  return (
-    <HashRouter>
+const TrelloApp = ({ successLogin , user }) => {
+  
+  return <HashRouter>
       <Switch>
-        <Route exact path="/" render={() => <SignIn title={title}/>}/>
-        <Route path="/SignUp" render={() => <SignUp title={title}/>}/>
-        <Route path="/Board" render={() => <Board title={title} />}/>
-        <Route path="/DetailBoard" render={() => <Detail title={title}/>}/>
+        <Route exact path="/SignIn" render={() => <SignIn successLogin={successLogin} />} />
+        <Route path="/SignUp" render={() => <SignUp successLogin={successLogin} />} />
+        <Route path="/Board" render={() => <Board successLogin={successLogin} user={user} />} />
+        <Route path="/DetailBoard" render={() => <Detail title={"hello Word"} />} />
       </Switch>
-    </HashRouter>
-  );
+    </HashRouter>;
 };
-const mapToProps = ({ title }) => ({ title });
+const mapToProps = ({ successLogin , user }) => ({ successLogin , user });
 export default connect(mapToProps)(TrelloApp);
