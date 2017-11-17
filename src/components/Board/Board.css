@@ -1,0 +1,31 @@
+.Narvab{
+  background-color: #0d47a1;
+  border: nones;
+}
+.botones{
+  background-color: #69A9E0;
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 150px;
+}
+.icontrello{
+  margin-left: 10px;
+}
+.logo{
+  width: 150px;
+  height: 40px;
+  margin-top: 5px;
+  margin-left: 450px;
+  background-color: transparent;
+}
+.user{
+  color: white;
+  margin-left: 230px;
+}
+.btn-signout{
+  color: white;
+}
+.btn-signout:hover{
+  color: white;
+}
