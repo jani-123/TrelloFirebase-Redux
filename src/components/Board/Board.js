@@ -21,11 +21,41 @@ const NavBoard = ({ user }) => {
         </div>
         <div className="navbar-header">
           <h4 className="user">
-            <i className="fa fa-user-circle" aria-hidden="true" />  {user.email}  | <button className="btn-link btn-signout" onClick={signOut}>Cerrar Sesión</button>
+            <i className="fa fa-user-circle" aria-hidden="true" /> {user.email}{" "}
+            |{" "}
+            <button className="btn-link btn-signout" onClick={signOut}>
+              Cerrar Sesión
+            </button>
           </h4>
         </div>
       </div>
     </nav>
+  );
+};
+
+const MyBoard = () => {
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-md-3">
+          <div className="board">Add Board ...</div>
+        </div>
+        <div className="col-md-3 addboard">
+          <form className="form-horizontal">
+            <input
+              placeholder="add"
+              onChange={e => {
+                this.note = e;
+              }}
+            />
+            <button className="btn btn-success guardar" type="submit">
+              Guardar
+            </button>
+            <button className="btn btn-defaul elimina">X</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -34,11 +64,9 @@ const Board = ({ successLogin, user }) => {
     <div className="Board-container">
       {!successLogin && <Redirect to="/SignIn" />}
       <div>
-        <NavBoard user={user}/>
-        <div>
-          HOLA MUNDO!!
-        </div>
-        
+        <NavBoard user={user} />
+        <h3>My Board</h3>
+        <MyBoard />
       </div>
     </div>
   );
