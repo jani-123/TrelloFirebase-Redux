@@ -1,6 +1,7 @@
 import store from "../store/store";
 import { auth, database } from "../firebase.js";
 
+// actions para el login
 export function addSignUp(firstname, lastname, email, password) {
   auth.createUserWithEmailAndPassword(email, password).then(user => {
     let newuser = {
@@ -70,3 +71,29 @@ auth.onAuthStateChanged(user => {
     });
   }
 });
+// fin de login //////
+
+// añade boards 
+export const changeView = (index) => {
+  store.setState({
+    selectIdBoard: index
+  });
+};
+
+export function changeTrue() {
+  store.setState({
+    active: true
+  })
+} 
+
+export const saveDataBoard = (newBoard) => {
+  let newBoards = [...store.getState().boards];
+  newBoards.push({
+    title: newBoard,
+    noteList: []
+  });
+  store.setState({
+    boards: newBoards,
+    active: false
+  });
+};
