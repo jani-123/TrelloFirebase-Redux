@@ -15,16 +15,16 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 } from "./actions";
 import { NavLink } from "react-router-dom";*/
 
-const TrelloApp = ({ successLogin , user , boards , active}) => {
+const TrelloApp = ({ successLogin , user , boards , active , selectIdBoard}) => {
   
   return <HashRouter>
       <Switch>
         <Route exact path="/SignIn" render={() => <SignIn successLogin={successLogin} />} />
         <Route path="/SignUp" render={() => <SignUp successLogin={successLogin} />} />
         <Route path="/Board" render={() => <Board successLogin={successLogin} user={user} boards={boards} active={active} />} />
-        <Route path="/DetailBoard" render={() => <Detail successLogin={successLogin} user={user} boards={boards} active={active} />} />
+        <Route path="/DetailBoard" render={() => <Detail user={user} boards={boards} active={active} selectIdBoard={selectIdBoard} />} />
       </Switch>
     </HashRouter>;
 };
-const mapToProps = ({ successLogin , user , boards , active}) => ({successLogin, user, boards, active });
+const mapToProps = ({ successLogin , user , boards , active ,selectIdBoard}) => ({successLogin, user, boards, active, selectIdBoard});
 export default connect(mapToProps)(TrelloApp);

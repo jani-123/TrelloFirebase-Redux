@@ -35,25 +35,90 @@
 /* new list */
 
 .list {
-    height: 50px;
+  height: 50px;
     background-color: #2869cc;
     padding: 10px;
     color: white;
     border-radius: 5px;
-    opacity: 0.60;
+    /* margin-left: 10px; */
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 230px;
+    /* opacity: 0.60; */
+    margin-top: 100px;
+    margin-right: 20px;
 }
-
+.listBox{
+	display:inline-flex;
+  height:300px;
+  margin-right: 25px;
+}
+.titleBoard{
+  color: white;
+  margin-left: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 .newList{
-  padding: 5px; 
-  margin: 20px;
-  width: 270px;
-  height: 110px;
-  border-radius: 4px;
-  color: #777;
-  background-color: #E2E4E6;
-  display: inline-block;
+  padding: 15px;
+    margin: 20px;
+    width: 270px;
+    height: 110px;
+    border-radius: 4px;
+    color: white;
+    background-color: #E2E4E6;
+    display: inline-block;
+    margin-top: 100px;
+}
+.save{
+  margin-top: 10px;
+}
+.remove{
+  margin-top: 10px;
+}
+.addlist{
+  background-color: blue;
+    border-radius: 5px;
+    padding: 3px;
+    opacity: 0.30;
 }
 .inpuTitleList {
     width: 250px;
     margin-top: 20px;
+}
+.noteList{
+    margin-top: 100px;
+    margin-right: 20px;
+    width: 220px;
+    border-radius: 5px;
+    background-color: rgb(94, 94, 206);
+    height: 80px;
+    padding: 10px;
+}
+.noteList p{
+  color: white;
+}
+.btn-link{
+  color: white;
+    background-color: cornflowerblue;
+    width: 200px;
+    border-radius: 5px;
+    opacity: 0.50;
+}
+.btn-link:hove{
+  color:white;
+}
+.note{
+    margin-top: 100px;
+    margin-right: 20px;
+    width: 220px;
+    border-radius: 5px;
+    background-color: #E2E4E6;
+    height: auto;
+    padding: 10px;
+    color: rgb(78, 76, 76);
+}
+.button{
+  margin-top: 10px;
+  margin-right: 10px;
 }
