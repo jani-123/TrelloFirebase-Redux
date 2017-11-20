@@ -1,5 +1,5 @@
 import store from "../store/store";
-import { auth, database ,firebase } from "../firebase.js";
+import { auth, database, firebase } from "../firebase.js";
 
 // actions para el login
 export function addSignUp(firstname, lastname, email, password) {
@@ -46,9 +46,12 @@ export function addSignIn(user, pass) {
             email: fullUserInfo.email
           }
         });
-        console.log("salee",userObj.uid);
+        console.log("salee", userObj.uid);
+        readDataBoard();
       });
+    
   });
+
 }
 
 export function signOut() {
@@ -62,7 +65,7 @@ export function signOut() {
   });
 }
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(user => { // se llama cada ves q se hace login on crea como un timer al aver un cambio se llama de maera autonatica
   if (user) {
     console.log("user", user);
     let usersRef = database.ref("/users");
@@ -87,32 +90,32 @@ export function changeTrue() {
   });
 }
 
-export const saveDataBoard = (newBoard) => {
+export const saveDataBoard = newBoard => {
   let newBoards = store.getState().boards;
   let ids;
-  if(newBoards != undefined){ 
+  if (newBoards != undefined) {
     ids = newBoards.length;
   }
   const objetBoard = {
-    id:ids,
+    id: ids,
     title: newBoard,
     noteList: [],
-    change:false
-  }
-  const boardNews = newBoards.concat(objetBoard);
+    change: false
+  };
   store.setState({
-    boards: boardNews,
     active: false
   });
- console.log(store.getState().user.id);
-  database.ref("users/" + store.getState().user.id + "/boards/" + objetBoard.id).set(objetBoard);
+  console.log(store.getState().user.id);
+  database
+    .ref("users/" + store.getState().user.id + "/boards/" + objetBoard.id)
+    .set(objetBoard);
 };
 
 // mas actions
 export const saveDataLIst = (selectIdBoard, newList) => {
   let newBoards = [...store.getState().boards];
-  let ids=0;
-  if(newBoards != undefined){ 
+  let ids = 0;
+  if (newBoards != undefined) {
     ids = newBoards[selectIdBoard].noteList.length;
   }
   const noteLists = {
@@ -120,25 +123,43 @@ export const saveDataLIst = (selectIdBoard, newList) => {
     subtitle: newList,
     cards: [],
     change: false
-  }
+  };
   newBoards[selectIdBoard].noteList.push(noteLists);
   store.setState({
     boards: newBoards,
     active: false
   });
-  database.ref("users/" + store.getState().user.id + "/boards/" + newBoards[selectIdBoard].id + "/noteList/" + noteLists.id ).set(noteLists);
+  database
+    .ref(
+      "users/" +
+        store.getState().user.id +
+        "/boards/" +
+        newBoards[selectIdBoard].id +
+        "/noteList/" +
+        noteLists.id
+    )
+    .set(noteLists);
 };
 
-export const saveDataCardList = (selectIdBoard,index,card) => {
+export const saveDataCardList = (selectIdBoard, index, card) => {
   let newBoards = [...store.getState().boards];
-  
-  newBoards[selectIdBoard].noteList[index].change=false;
-  store.setState({ 
-    boards: newBoards,
-    });
-  database.ref("users/" + store.getState().user.id + "/boards/" + newBoards[selectIdBoard].id + "/noteList/" + newBoards[selectIdBoard].noteList[index].id + "/cards/").push(card);
-};
 
+  newBoards[selectIdBoard].noteList[index].change = false;
+  store.setState({
+    boards: newBoards
+  });
+  database
+    .ref(
+      "users/" +
+        store.getState().user.id +
+        "/boards/" +
+        newBoards[selectIdBoard].id +
+        "/noteList/" +
+        newBoards[selectIdBoard].noteList[index].id +
+        "/cards/"
+    )
+    .push(card);
+};
 
 export const changeDataTrue = (selectIdBoard, index) => {
   let newBoards = [...store.getState().boards];
@@ -147,3 +168,17 @@ export const changeDataTrue = (selectIdBoard, index) => {
     boards: newBoards
   });
 };
+
+function readDataBoard() {
+  database.ref("users/" + store.getState().user.id + "/boards/").on("value", res => {
+      console.log("2.", res);
+      let arr = [];
+      res.forEach(snap => {
+        console.log("3",snap.val());
+        const x = snap.val();
+        arr.push(x);
+      })
+      store.setState({
+        boards:arr});
+    });
+}
