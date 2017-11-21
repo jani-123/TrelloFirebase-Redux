@@ -36,7 +36,6 @@ export function addSignIn(user, pass) {
       .once("value")
       .then(res => {
         const fullUserInfo = res.val();
-
         console.log("full info ", fullUserInfo);
         store.setState({
           user: {
@@ -74,21 +73,8 @@ auth.onAuthStateChanged(user => {
     });
   }
 });
-// fin de login //////
-
+// fin de login 
 // añade boards
-export const changeView = index => {
-  store.setState({
-    selectIdBoard: index
-  });
-};
-
-export function changeTrue() {
-  store.setState({
-    active: true
-  });
-}
-
 export const saveDataBoard = newBoard => {
   let newBoards = store.getState().boards;
   let ids;
@@ -120,9 +106,8 @@ export const saveDataLIst = (selectIdBoard, newList) => {
     id: ids,
     subtitle: newList,
     cards: [],
-    change: false
   };
-  //newBoards[selectIdBoard].noteList.push(noteLists);
+  
   store.setState({
     active: false
   });
@@ -140,11 +125,6 @@ export const saveDataLIst = (selectIdBoard, newList) => {
 
 export const saveDataCardList = (selectIdBoard, index, card) => {
   let newBoards = [...store.getState().boards];
-
-  newBoards[selectIdBoard].noteList[index].change = false;
-  // store.setState({
-  //   boards: newBoards
-  // });
   database
     .ref(
       "users/" +
@@ -157,10 +137,22 @@ export const saveDataCardList = (selectIdBoard, index, card) => {
     )
     .push(card);
 };
+export const changeView = index => {
+  store.setState({
+    selectIdBoard: index
+  });
+};
 
+export function changeTrue() {
+  store.setState({
+    active: true
+  });
+}
 export const changeDataTrue = (selectIdBoard, index) => {
   let newBoards = [...store.getState().boards];
-  newBoards[selectIdBoard].noteList[index].change = true;
+  store.setState({
+    activeCard: true
+  })
   store.setState({
     boards: newBoards
   });
@@ -171,6 +163,7 @@ function readDataBoard() {
       let arrBoard = [];
       res.forEach(snap => {
         const boardVal = snap.val();
+        console.log("on",boardVal);
         let arrList = [];
         database.ref("users/" + store.getState().user.id + "/boards/" + boardVal.id + "/noteList/").on("value", res => {
           res.forEach(snap => {
@@ -187,7 +180,6 @@ function readDataBoard() {
               id: listVal.id,
               subtitle: listVal.subtitle,
               cards: arrCard,
-              change: listVal.change
             })
           })
         })

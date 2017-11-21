@@ -10,8 +10,10 @@ const initialState = {
     email: null
   },
   boards: [],
-  active: false
+  active: false,
+  activeCard:false
 };
 
 const store = createStore(initialState);
 export default store;
+ 

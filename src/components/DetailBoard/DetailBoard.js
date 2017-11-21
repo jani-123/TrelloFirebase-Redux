@@ -37,7 +37,7 @@ const NavBoard = ({ user }) => {
   );
 };
 
-const NoteList = ({ noteList, index, selectIdBoard, active }) => {
+const NoteList = ({ noteList, index, selectIdBoard, active ,activeCard}) => {
   let card = "";
   return (
     <div key={index} className="container noteList">
@@ -49,7 +49,7 @@ const NoteList = ({ noteList, index, selectIdBoard, active }) => {
           </div>
         );
       })}
-      {noteList.change ? (
+      {activeCard? (
         <div>
           <textarea
             className="form-control"
@@ -81,7 +81,7 @@ const NoteList = ({ noteList, index, selectIdBoard, active }) => {
   );
 };
 
-const Detail = ({successLogin, boards, selectIdBoard, active, user }) => {
+const Detail = ({successLogin, boards, selectIdBoard, active, user , activeCard}) => {
   let newList = "";
   return (
     <div>
@@ -97,6 +97,7 @@ const Detail = ({successLogin, boards, selectIdBoard, active, user }) => {
               index={index}
               selectIdBoard={selectIdBoard}
               active={active}
+              activeCard={activeCard}
             />
           );
         })}
