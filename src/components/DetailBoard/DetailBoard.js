@@ -8,7 +8,7 @@ import {
 } from "../../actions/actions";
 import "./DetailBoard.css";
 import trello from "../../trello-logo.png";
-
+import {Redirect } from "react-router-dom";
 const NavBoard = ({ user }) => {
   return (
     <nav className="navbar">
@@ -37,34 +37,55 @@ const NavBoard = ({ user }) => {
   );
 };
 
-const NoteList = ({ board, index, selectIdBoard, active }) => {
+const NoteList = ({ noteList, index, selectIdBoard, active }) => {
   let card = "";
-  return <div key={index} className={board.change ? "note" : "noteList"}>
-      <p>{board.subtitle}</p>
-      
-      {board.change === true && <div>
-          <textarea className="form-control newcard" onChange={e => (card = e.currentTarget.value)} />
+  return (
+    <div key={index} className="container noteList">
+      <p>{noteList.subtitle}</p>
+      {noteList.cards.map((value, i) => {
+        return (
+          <div key={i} className="listCards">
+            <p>{value}</p>
+          </div>
+        );
+      })}
+      {noteList.change ? (
+        <div>
+          <textarea
+            className="form-control"
+            onChange={e => (card = e.currentTarget.value)}
+          />
           <div>
-            <button className="btn btn-lg btn-success button" onClick={() => {
+            <button
+              className="btn btn-lg btn-success button"
+              onClick={() => {
                 saveDataCardList(selectIdBoard, index, card);
-              }}>
+              }}
+            >
               Add
             </button>
             <button className="btn btn-lg btn-defaul button">Cancel</button>
           </div>
-        </div>}
-      {board.change === false && <button className="btn-link" onClick={() => {
+        </div>
+      ) : (
+        <div
+          className="addCards"
+          onClick={() => {
             changeDataTrue(selectIdBoard, index);
-          }}>
+          }}
+        >
           Add a new card
-        </button>}
-    </div>;
+        </div>
+      )}
+    </div>
+  );
 };
 
-const Detail = ({ boards, selectIdBoard, active, user }) => {
+const Detail = ({successLogin, boards, selectIdBoard, active, user }) => {
   let newList = "";
   return (
     <div>
+    {!successLogin && <Redirect to="/" />}
       <NavBoard user={user} />
       <div className="listBox">
         <h3 className="titleBoard">{boards[selectIdBoard].title}</h3>
@@ -72,24 +93,14 @@ const Detail = ({ boards, selectIdBoard, active, user }) => {
           return (
             <NoteList
               key={index}
-              board={item}
+              noteList={item}
               index={index}
               selectIdBoard={selectIdBoard}
               active={active}
             />
           );
         })}
-        {active === false && (
-          <div
-            className="list"
-            onClick={() => {
-              changeTrue();
-            }}
-          >
-            Add new list...
-          </div>
-        )}
-        {active === true && (
+        {active ? (
           <div className="newList">
             <input
               placeholder="Add a new list..."
@@ -107,6 +118,15 @@ const Detail = ({ boards, selectIdBoard, active, user }) => {
               Save list
             </button>
             <button className="btn btn-defaul remove">X</button>
+          </div>
+        ) : (
+          <div
+            className="list"
+            onClick={() => {
+              changeTrue();
+            }}
+          >
+            Add new list...
           </div>
         )}
       </div>

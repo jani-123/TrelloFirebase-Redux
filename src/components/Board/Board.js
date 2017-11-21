@@ -26,8 +26,8 @@ const NavBoard = ({ user }) => {
         </div>
         <div className="navbar-header">
           <h4 className="user">
-            <i className="fa fa-user-circle" aria-hidden="true" /> {user.email}{" "}
-            |{" "}
+            <i className="fa fa-user-circle" aria-hidden="true" /> {user.email}
+            |
             <button className="btn-link btn-signout" onClick={signOut}>
               Cerrar Sesión
             </button>
@@ -40,7 +40,7 @@ const NavBoard = ({ user }) => {
 
 const NewBoard = ({ board, index }) => {
   return (
-    <div key={index} className="board-wrap col-md-3">
+    <div key={index} className="box col-md-3">
       <NavLink
         to="/DetailBoard"
         onClick={() => {
@@ -66,11 +66,9 @@ const MyBoard = ({ boards, active }) => {
             return <NewBoard key={index} board={item} index={index} />;
           })}
           <div className="col-md-3">
-            {active === true && (
+            {active ? (
               <div className="newBoard">
-                <b>
                   <p>New board</p>
-                </b>
                 <input
                   className="InpuTitle"
                   placeholder="Title Board"
@@ -84,21 +82,21 @@ const MyBoard = ({ boards, active }) => {
                     saveDataBoard(newBoard);
                   }}
                 >
-                  Create board
-                </button>{" "}
+                  Create new board
+                </button>
                 <button className="btn remove">X</button>
               </div>
-            )}
-            {active === false && (
+            ) : (
               <div
                 className="board"
                 onClick={() => {
                   changeTrue();
                 }}
               >
-                <center>Add new board...</center>
+                <h4>Add new board...</h4>
               </div>
-            )}
+            )
+          }
           </div>
         </div>
       </div>
@@ -108,11 +106,11 @@ const MyBoard = ({ boards, active }) => {
 
 const Board = ({ successLogin, user, boards, active }) => {
   return (
-    <div className="Board-container">
-      {!successLogin && <Redirect to="/SignIn" />}
+    <div>
+      {!successLogin && <Redirect to="/" />}
       <div>
         <NavBoard user={user} />
-        <h3>My Board</h3>
+        <h3 className="myBoards">My Board</h3>
         <MyBoard boards={boards} active={active} />
       </div>
     </div>

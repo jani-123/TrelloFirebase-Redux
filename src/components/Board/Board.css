@@ -15,7 +15,7 @@
   padding: 5px; 
   margin: 20px;
   width: 270px;
-  height: 110px;
+  height: 110px; 
   border-radius: 4px;
   color: #777;
   background-color: #E2E4E6;
@@ -42,7 +42,7 @@
   padding: 5px 0px 10px 10px;
   margin: 5px;
 }
-.board-wrap{
+.box{
   padding:10px;
 }
 .myBoards{

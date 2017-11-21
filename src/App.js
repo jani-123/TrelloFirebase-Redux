@@ -10,10 +10,10 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 const TrelloApp = ({ successLogin , user , boards , active , selectIdBoard}) => {
   return <HashRouter>
       <Switch>
-        <Route exact path="/SignIn" render={() => <SignIn successLogin={successLogin} />} />
+        <Route exact path="/" render={() => <SignIn successLogin={successLogin} />} />
         <Route path="/SignUp" render={() => <SignUp successLogin={successLogin} />} />
         <Route path="/Board" render={() => <Board successLogin={successLogin} user={user} boards={boards} active={active} />} />
-        <Route path="/DetailBoard" render={() => <Detail user={user} boards={boards} active={active} selectIdBoard={selectIdBoard} />} />
+        <Route path="/DetailBoard" render={() => <Detail successLogin={successLogin} user={user} boards={boards} active={active} selectIdBoard={selectIdBoard} />} />
       </Switch>
     </HashRouter>;
 };

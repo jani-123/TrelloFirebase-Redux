@@ -10,7 +10,7 @@ export function addSignUp(firstname, lastname, email, password) {
       email
     };
     database.ref("users/" + userObj.uid).set(newuser);
-
+ 
     database
       .ref("users/" + userObj.uid)
       .once("value")
@@ -64,7 +64,7 @@ export function signOut() {
 }
 
 auth.onAuthStateChanged(user => {
-  // se llama cada ves q se hace login on crea como un timer al aver un cambio se llama de maera autonatica
+ 
   if (user) {
     console.log("user", user);
     let usersRef = database.ref("/users");
@@ -99,7 +99,6 @@ export const saveDataBoard = newBoard => {
     id: ids,
     title: newBoard,
     noteList: [],
-    change: false
   };
   store.setState({
     active: false
@@ -172,7 +171,6 @@ function readDataBoard() {
       let arrBoard = [];
       res.forEach(snap => {
         const boardVal = snap.val();
-
         let arrList = [];
         database.ref("users/" + store.getState().user.id + "/boards/" + boardVal.id + "/noteList/").on("value", res => {
           res.forEach(snap => {
@@ -180,7 +178,6 @@ function readDataBoard() {
             console.log("sisalej..",listVal);
             let arrCard = [];
             database.ref("users/" + store.getState().user.id + "/boards/" + boardVal.id + "/noteList/" + listVal.id + "/cards/").on("value", res =>{
-              
               res.forEach(snap => {
                 const cardVal = snap.val();
                 arrCard.push(cardVal);
@@ -197,10 +194,8 @@ function readDataBoard() {
         arrBoard.push({
           id: boardVal.id,
           title: boardVal.title,
-          noteList: arrList,
-          change: boardVal.change
+          noteList: arrList
         })
-
       });
       store.setState({
         boards: arrBoard
