@@ -1,5 +1,5 @@
 import store from "../store/store";
-import { auth, database, firebase } from "../firebase.js";
+import { auth, database} from "../firebase.js";
 
 // actions para el login
 export function addSignUp(firstname, lastname, email, password) {
@@ -92,7 +92,7 @@ export function changeTrue() {
 export const saveDataBoard = newBoard => {
   let newBoards = store.getState().boards;
   let ids;
-  if (newBoards != undefined) {
+  if (newBoards !== undefined) {
     ids = newBoards.length;
   }
   const objetBoard = {
@@ -113,7 +113,7 @@ export const saveDataBoard = newBoard => {
 export const saveDataLIst = (selectIdBoard, newList) => {
   let newBoards = [...store.getState().boards];
   let ids = 0;
-  if (newBoards != undefined) {
+  if (newBoards !== undefined) {
     ids = newBoards[selectIdBoard].noteList.length;
   }
   const noteLists = {
