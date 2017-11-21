@@ -1,6 +1,5 @@
 import React from "react";
 import {addSignIn} from '../../actions/actions'
-//import Stage from '../Stage/Stage';
 import trello from '../../trello-logo.png';
 import './SignIn.css'
 import { NavLink , Redirect} from "react-router-dom";
@@ -54,7 +53,7 @@ const SignIn = ({ successLogin }) => {
       <div className="footer">
         <a href="https://trello.com" className="new">
           Trello
-        </a>{" "}
+        </a>
         tribute for educational purposes crafted with ♥ for Chio by @ChioQA
       </div>
     </div>

@@ -6,17 +6,8 @@ import Board from "./components/Board/Board.js";
 import Detail from "./components/DetailBoard/DetailBoard.js";
 import { connect } from "redux-zero/react";
 import { HashRouter, Switch, Route } from "react-router-dom";
-/*import {
-  changeList,
-  addTitleList,
-  changeVista,
-  changeTextList,
-  addNote 
-} from "./actions";
-import { NavLink } from "react-router-dom";*/
 
 const TrelloApp = ({ successLogin , user , boards , active , selectIdBoard}) => {
-  
   return <HashRouter>
       <Switch>
         <Route exact path="/SignIn" render={() => <SignIn successLogin={successLogin} />} />

@@ -77,7 +77,7 @@ const SignUp = ({ successLogin }) => {
       <div className="footer">
         <a href="https://trello.com" className="new">
           Trello
-        </a>{" "}
+        </a>
         tribute for educational purposes crafted with ♥ for Chio by @ChioQA
       </div>
     </div>

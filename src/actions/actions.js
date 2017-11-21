@@ -49,9 +49,7 @@ export function addSignIn(user, pass) {
         console.log("salee", userObj.uid);
         readDataBoard();
       });
-    
   });
-
 }
 
 export function signOut() {
@@ -65,7 +63,8 @@ export function signOut() {
   });
 }
 
-auth.onAuthStateChanged(user => { // se llama cada ves q se hace login on crea como un timer al aver un cambio se llama de maera autonatica
+auth.onAuthStateChanged(user => {
+  // se llama cada ves q se hace login on crea como un timer al aver un cambio se llama de maera autonatica
   if (user) {
     console.log("user", user);
     let usersRef = database.ref("/users");
@@ -124,9 +123,8 @@ export const saveDataLIst = (selectIdBoard, newList) => {
     cards: [],
     change: false
   };
-  newBoards[selectIdBoard].noteList.push(noteLists);
+  //newBoards[selectIdBoard].noteList.push(noteLists);
   store.setState({
-    boards: newBoards,
     active: false
   });
   database
@@ -145,9 +143,9 @@ export const saveDataCardList = (selectIdBoard, index, card) => {
   let newBoards = [...store.getState().boards];
 
   newBoards[selectIdBoard].noteList[index].change = false;
-  store.setState({
-    boards: newBoards
-  });
+  // store.setState({
+  //   boards: newBoards
+  // });
   database
     .ref(
       "users/" +
@@ -171,14 +169,41 @@ export const changeDataTrue = (selectIdBoard, index) => {
 
 function readDataBoard() {
   database.ref("users/" + store.getState().user.id + "/boards/").on("value", res => {
-      console.log("2.", res);
-      let arr = [];
+      let arrBoard = [];
       res.forEach(snap => {
-        console.log("3",snap.val());
-        const x = snap.val();
-        arr.push(x);
-      })
+        const boardVal = snap.val();
+
+        let arrList = [];
+        database.ref("users/" + store.getState().user.id + "/boards/" + boardVal.id + "/noteList/").on("value", res => {
+          res.forEach(snap => {
+            const listVal = snap.val();
+            console.log("sisalej..",listVal);
+            let arrCard = [];
+            database.ref("users/" + store.getState().user.id + "/boards/" + boardVal.id + "/noteList/" + listVal.id + "/cards/").on("value", res =>{
+              
+              res.forEach(snap => {
+                const cardVal = snap.val();
+                arrCard.push(cardVal);
+              })
+            })
+            arrList.push({
+              id: listVal.id,
+              subtitle: listVal.subtitle,
+              cards: arrCard,
+              change: listVal.change
+            })
+          })
+        })
+        arrBoard.push({
+          id: boardVal.id,
+          title: boardVal.title,
+          noteList: arrList,
+          change: boardVal.change
+        })
+
+      });
       store.setState({
-        boards:arr});
+        boards: arrBoard
+      });
     });
 }

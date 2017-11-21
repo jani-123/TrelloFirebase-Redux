@@ -6,7 +6,6 @@ import {
   saveDataLIst,
   changeDataTrue
 } from "../../actions/actions";
-//import Stage from '../Stage/Stage';
 import "./DetailBoard.css";
 import trello from "../../trello-logo.png";
 
@@ -26,8 +25,8 @@ const NavBoard = ({ user }) => {
         </div>
         <div className="navbar-header">
           <h4 className="user">
-            <i className="fa fa-user-circle" aria-hidden="true" /> {user.email}{" "}
-            |{" "}
+            <i className="fa fa-user-circle" aria-hidden="true" /> {user.email}
+            |
             <button className="btn-link btn-signout" onClick={signOut}>
               Cerrar Sesión
             </button>
@@ -42,11 +41,6 @@ const NoteList = ({ board, index, selectIdBoard, active }) => {
   let card = "";
   return <div key={index} className={board.change ? "note" : "noteList"}>
       <p>{board.subtitle}</p>
-      
-        {board.cards.map((value, i) => {
-          console.log("key", i, "value", value);
-          
-        })}
       
       {board.change === true && <div>
           <textarea className="form-control newcard" onChange={e => (card = e.currentTarget.value)} />
