@@ -5,7 +5,7 @@ import {
   saveDataCardList,
   saveDataLIst,
   changeDataTrue
-} from "../../actions/actions";
+} from "../../actions/actions"; 
 import "./DetailBoard.css";
 import trello from "../../trello-logo.png";
 import {Redirect } from "react-router-dom";
@@ -37,7 +37,7 @@ const NavBoard = ({ user }) => {
   );
 };
 
-const NoteList = ({ noteList, index, selectIdBoard, active ,activeCard}) => {
+const NoteList = ({ noteList, index, selectIdBoard, active}) => {
   let card = "";
   return (
     <div key={index} className="container noteList">
@@ -49,7 +49,7 @@ const NoteList = ({ noteList, index, selectIdBoard, active ,activeCard}) => {
           </div>
         );
       })}
-      {activeCard? (
+      {noteList.change? (
         <div>
           <textarea
             className="form-control"

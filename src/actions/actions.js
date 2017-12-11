@@ -6,7 +6,7 @@ export function addSignUp(firstname, lastname, email, password) {
   auth.createUserWithEmailAndPassword(email, password).then(userObj => {
     let newuser = {
       firstname,
-      lastname,
+      lastname, 
       email
     };
     database.ref("users/" + userObj.uid).set(newuser);
@@ -106,6 +106,7 @@ export const saveDataLIst = (selectIdBoard, newList) => {
     id: ids,
     subtitle: newList,
     cards: [],
+    change:false
   };
   
   store.setState({
@@ -150,13 +151,11 @@ export function changeTrue() {
 }
 export const changeDataTrue = (selectIdBoard, index) => {
   let newBoards = [...store.getState().boards];
-  store.setState({
-    activeCard: true
-  })
+  newBoards[selectIdBoard].noteList[index].change = true;
   store.setState({
     boards: newBoards
   });
-};
+}; 
 
 function readDataBoard() {
   database.ref("users/" + store.getState().user.id + "/boards/").on("value", res => {
@@ -180,6 +179,7 @@ function readDataBoard() {
               id: listVal.id,
               subtitle: listVal.subtitle,
               cards: arrCard,
+              change: listVal.change
             })
           })
         })

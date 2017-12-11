@@ -10,8 +10,7 @@ const initialState = {
     email: null
   },
   boards: [],
-  active: false,
-  activeCard:false
+  active: false
 };
 
 const store = createStore(initialState);
