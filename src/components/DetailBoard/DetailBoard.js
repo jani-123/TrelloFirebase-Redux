@@ -57,14 +57,14 @@ const NoteList = ({ noteList, index, selectIdBoard, active}) => {
           />
           <div>
             <button
-              className="btn btn-lg btn-success button"
+              className="btn btn-success button"
               onClick={() => {
                 saveDataCardList(selectIdBoard, index, card);
               }}
             >
               Add
             </button>
-            <button className="btn btn-lg btn-defaul button">Cancel</button>
+            <button className="btn btn-defaul button">Cancel</button>
           </div>
         </div>
       ) : (
